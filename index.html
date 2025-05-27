@@ -1,74 +1,56 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Мой Магазин</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Магазин с выбором языка</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f5f7fa;
-      color: #333;
-      margin: 0;
-      padding: 20px;
-    }
-    #language-selector {
-      margin-bottom: 20px;
-    }
-    h1, p {
-      color: #2c3e50;
-    }
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    select { font-size: 16px; padding: 5px; }
   </style>
 </head>
 <body>
 
-  <div id="language-selector">
-    <label for="lang">Выберите язык: </label>
-    <select id="lang">
-      <option value="" selected>-- Выберите язык --</option>
-      <option value="ru">Русский</option>
-      <option value="en">English</option>
-      <option value="uk">Українська</option>
-    </select>
-  </div>
+  <h1 id="welcome">Добро пожаловать</h1>
+  <p id="chooseLang">Выберите язык:</p>
 
-  <h1 id="title"></h1>
-  <p id="welcome"></p>
+  <select id="languageSelector">
+    <option value="ru">Русский</option>
+    <option value="uk">Українська</option>
+    <option value="en">English</option>
+  </select>
 
   <script>
     const texts = {
       ru: {
-        title: "Добро пожаловать в мой магазин!",
-        welcome: "Здесь вы можете выбрать лучшие товары."
-      },
-      en: {
-        title: "Welcome to my shop!",
-        welcome: "Here you can choose the best products."
+        welcome: "Добро пожаловать",
+        chooseLang: "Выберите язык:"
       },
       uk: {
-        title: "Ласкаво просимо до мого магазину!",
-        welcome: "Тут ви можете обрати найкращі товари."
+        welcome: "Ласкаво просимо",
+        chooseLang: "Оберіть мову:"
+      },
+      en: {
+        welcome: "Welcome",
+        chooseLang: "Choose language:"
       }
     };
 
-    const langSelect = document.getElementById('lang');
-    const titleEl = document.getElementById('title');
-    const welcomeEl = document.getElementById('welcome');
+    function setLanguage(lang) {
+      document.getElementById('welcome').textContent = texts[lang].welcome;
+      document.getElementById('chooseLang').textContent = texts[lang].chooseLang;
+      document.getElementById('languageSelector').value = lang;
+    }
 
-    langSelect.addEventListener('change', () => {
-      const lang = langSelect.value;
-      if(texts[lang]) {
-        titleEl.textContent = texts[lang].title;
-        welcomeEl.textContent = texts[lang].welcome;
-      } else {
-        titleEl.textContent = '';
-        welcomeEl.textContent = '';
-      }
+    document.getElementById('languageSelector').addEventListener('change', (e) => {
+      setLanguage(e.target.value);
     });
 
-    // При загрузке страницы текст пустой
-    titleEl.textContent = '';
-    welcomeEl.textContent = '';
+    // Устанавливаем язык по умолчанию — украинский
+    document.addEventListener("DOMContentLoaded", () => {
+      setLanguage('uk');
+    });
   </script>
 
 </body>
