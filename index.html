@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Мой Магазин</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f7fa;
+      color: #333;
+      margin: 0;
+      padding: 20px;
+    }
+    #language-selector {
+      margin-bottom: 20px;
+    }
+    h1, p {
+      color: #2c3e50;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="language-selector">
+    <label for="lang">Выберите язык: </label>
+    <select id="lang">
+      <option value="" selected>-- Выберите язык --</option>
+      <option value="ru">Русский</option>
+      <option value="en">English</option>
+      <option value="uk">Українська</option>
+    </select>
+  </div>
+
+  <h1 id="title"></h1>
+  <p id="welcome"></p>
+
+  <script>
+    const texts = {
+      ru: {
+        title: "Добро пожаловать в мой магазин!",
+        welcome: "Здесь вы можете выбрать лучшие товары."
+      },
+      en: {
+        title: "Welcome to my shop!",
+        welcome: "Here you can choose the best products."
+      },
+      uk: {
+        title: "Ласкаво просимо до мого магазину!",
+        welcome: "Тут ви можете обрати найкращі товари."
+      }
+    };
+
+    const langSelect = document.getElementById('lang');
+    const titleEl = document.getElementById('title');
+    const welcomeEl = document.getElementById('welcome');
+
+    langSelect.addEventListener('change', () => {
+      const lang = langSelect.value;
+      if(texts[lang]) {
+        titleEl.textContent = texts[lang].title;
+        welcomeEl.textContent = texts[lang].welcome;
+      } else {
+        titleEl.textContent = '';
+        welcomeEl.textContent = '';
+      }
+    });
+
+    // При загрузке страницы текст пустой
+    titleEl.textContent = '';
+    welcomeEl.textContent = '';
+  </script>
+
+</body>
+</html>
