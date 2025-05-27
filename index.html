@@ -2,158 +2,117 @@
 <html lang="uk">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Реєстрація</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MyShop</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background-color: #f0f2f5;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0; padding: 0;
+      background: #f0f4f8;
+      color: #333;
+    }
+    header {
+      background: linear-gradient(90deg, #007bff, #0056b3);
       display: flex;
-      justify-content: center;
+      justify-content: space-between;
       align-items: center;
-      height: 100vh;
-      flex-direction: column;
+      padding: 10px 20px;
     }
-
-    .container {
-      background-color: #fff;
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      width: 300px;
-    }
-
-    h2 {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-
-    label {
-      display: block;
-      margin-bottom: 5px;
-      font-weight: bold;
-    }
-
-    input {
-      width: 100%;
-      padding: 8px;
-      margin-bottom: 15px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
-
-    .g-recaptcha {
-      margin-bottom: 15px;
-    }
-
-    button, .home-btn {
-      width: 100%;
-      padding: 10px;
-      background-color: #007bff;
+    .nav-buttons button, .account-btn {
+      flex: 1;
+      margin: 0 5px;
+      padding: 12px 0;
       border: none;
+      border-radius: 6px;
+      background: linear-gradient(45deg, #00c6ff, #0072ff);
       color: white;
-      border-radius: 5px;
+      font-weight: 600;
       font-size: 16px;
       cursor: pointer;
-      margin-top: 10px;
-      text-decoration: none;
-      display: inline-block;
+      transition: background 0.3s ease;
+      min-width: 120px;
+    }
+    .nav-buttons button:hover, .account-btn:hover {
+      background: linear-gradient(45deg, #0056b3, #003d80);
+    }
+    .nav-buttons {
+      display: flex;
+      gap: 10px;
+      flex-grow: 1;
+      max-width: 600px;
+    }
+    .account-actions {
+      display: flex;
+      align-items: center;
+    }
+    .account-btn {
+      margin-left: 15px;
+    }
+    .lang-select {
+      display: flex;
+      justify-content: center;
+      margin: 30px 0 10px;
+    }
+    .lang-select select {
+      padding: 8px 12px;
+      font-size: 18px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      outline: none;
+      cursor: pointer;
+    }
+    .welcome-message {
       text-align: center;
-    }
-
-    button:hover, .home-btn:hover {
-      background-color: #0056b3;
-    }
-
-    select {
-      margin-bottom: 20px;
+      font-size: 26px;
+      font-weight: 600;
+      margin-top: 50px;
+      color: #007bff;
     }
   </style>
-  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 <body>
-  <!-- Выбор языка -->
-  <select id="languageSelect">
-    <option value="uk">Українська</option>
-    <option value="ru">Русский</option>
-    <option value="en">English</option>
-  </select>
 
-  <div class="container">
-    <h2 id="title">Реєстрація</h2>
-    <form>
-      <label for="username" id="label-username">Ім’я користувача:</label>
-      <input type="text" id="username" name="username" required />
+  <header>
+    <div class="nav-buttons">
+      <button id="homeBtn" onclick="goHome()">Головна</button>
+      <button id="registerBtn">Реєстрація</button>
+    </div>
+    <div class="account-actions">
+      <button id="accountBtn" class="account-btn" style="display:none;">Особистий кабінет</button>
+    </div>
+  </header>
 
-      <label for="email" id="label-email">Email:</label>
-      <input type="email" id="email" name="email" required />
-
-      <label for="password" id="label-password">Пароль:</label>
-      <input type="password" id="password" name="password" required />
-
-      <div class="g-recaptcha" data-sitekey="ВАШ_КЛЮЧ_САЙТУ_ТУТ"></div>
-
-      <button type="submit" id="registerBtn">Зареєструватися</button>
-    </form>
-    <a href="index.html" class="home-btn" id="homeBtn">Головна сторінка</a>
+  <div class="lang-select">
+    <select id="languageSelect" onchange="changeLanguage()">
+      <option value="uk">Українська</option>
+      <option value="ru">Русский</option>
+      <option value="en">English</option>
+    </select>
   </div>
 
-  <script>
-    const translations = {
-      uk: {
-        title: "Реєстрація",
-        username: "Ім’я користувача:",
-        email: "Email:",
-        password: "Пароль:",
-        register: "Зареєструватися",
-        home: "Головна сторінка"
-      },
-      ru: {
-        title: "Регистрация",
-        username: "Имя пользователя:",
-        email: "Электронная почта:",
-        password: "Пароль:",
-        register: "Зарегистрироваться",
-        home: "Главная страница"
-      },
-      en: {
-        title: "Registration",
-        username: "Username:",
-        email: "Email:",
-        password: "Password:",
-        register: "Register",
-        home: "Home"
-      }
-    };
+  <div class="welcome-message" id="welcomeMessage">
+    Вітаємо на MyShop — оберіть мову та починайте покупки!
+  </div>
 
-    const langSelect = document.getElementById("languageSelect");
-    const title = document.getElementById("title");
-    const labelUsername = document.getElementById("label-username");
-    const labelEmail = document.getElementById("label-email");
-    const labelPassword = document.getElementById("label-password");
-    const registerBtn = document.getElementById("registerBtn");
-    const homeBtn = document.getElementById("homeBtn");
+<script>
+  function goHome() {
+    // Перенаправление на главную страницу
+    window.location.href = 'home.html';
+  }
 
-    langSelect.addEventListener("change", () => {
-      const lang = langSelect.value;
-      updateLanguage(lang);
-      localStorage.setItem("lang", lang);
-    });
+  function changeLanguage() {
+    const lang = document.getElementById('languageSelect').value;
+    const welcome = document.getElementById('welcomeMessage');
 
-    function updateLanguage(lang) {
-      const t = translations[lang];
-      title.textContent = t.title;
-      labelUsername.textContent = t.username;
-      labelEmail.textContent = t.email;
-      labelPassword.textContent = t.password;
-      registerBtn.textContent = t.register;
-      homeBtn.textContent = t.home;
+    if (lang === 'uk') {
+      welcome.textContent = 'Вітаємо на MyShop — оберіть мову та починайте покупки!';
+    } else if (lang === 'ru') {
+      welcome.textContent = 'Добро пожаловать в MyShop — выберите язык и начинайте покупки!';
+    } else if (lang === 'en') {
+      welcome.textContent = 'Welcome to MyShop — choose your language and start shopping!';
     }
+  }
+</script>
 
-    // Установка языка при загрузке страницы
-    const savedLang = localStorage.getItem("lang") || "uk";
-    langSelect.value = savedLang;
-    updateLanguage(savedLang);
-  </script>
 </body>
 </html>
