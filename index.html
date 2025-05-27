@@ -26,7 +26,13 @@
     box-shadow: 0 4px 10px rgba(0,0,0,0.2);
   }
 
-  /* Кнопка Главная */
+  /* Группа кнопок слева */
+  .btn-group {
+    display: flex;
+    gap: 15px;
+  }
+
+  /* Кнопка Главная и Регистрация */
   .btn-home {
     background-color: #ff5c5c;
     border: none;
@@ -83,8 +89,10 @@
 <body>
 
 <header>
-  <button class="btn-home" id="homeBtn">Главная</button>
-  <button class="btn-home" id="registerBtn">Регистрация</button>
+  <div class="btn-group">
+    <button class="btn-home" id="homeBtn">Главная</button>
+    <button class="btn-home" id="registerBtn">Регистрация</button>
+  </div>
 
   <select id="language" title="Выберите язык">
     <option value="ru">Русский</option>
