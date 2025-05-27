@@ -1,262 +1,151 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>MyShop</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f0f4f8;
-      margin: 0; padding: 0;
-    }
-    header {
-      background: #007bff;
-      padding: 10px 0;
-      text-align: center;
-      color: white;
-      font-size: 24px;
-      font-weight: bold;
-    }
-    nav {
-      background: #0056b3;
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      padding: 15px 0;
-    }
-    nav button {
-      background: #007bff;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 6px;
-      color: white;
-      cursor: pointer;
-      font-size: 16px;
-      transition: background 0.3s ease;
-      min-width: 120px;
-    }
-    nav button:hover {
-      background: #0056b3;
-    }
-    main {
-      max-width: 600px;
-      margin: 30px auto;
-      background: white;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.1);
-      min-height: 300px;
-      text-align: center;
-    }
-    .hidden {
-      display: none;
-    }
-    input {
-      padding: 10px;
-      margin: 10px 0;
-      width: 80%;
-      font-size: 16px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-    }
-    .action-btn {
-      background: #28a745;
-      border: none;
-      color: white;
-      padding: 12px 25px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 16px;
-      margin-top: 10px;
-      transition: background 0.3s ease;
-    }
-    .action-btn:hover {
-      background: #218838;
-    }
-    .back-btn {
-      margin-top: 20px;
-      background: #dc3545;
-    }
-    .back-btn:hover {
-      background: #c82333;
-    }
-    .profile-info {
-      font-size: 18px;
-      margin-top: 15px;
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>MyShop</title>
+
+<style>
+  /* Общие стили */
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+    margin: 0; padding: 0;
+    color: #fff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  header {
+    background-color: rgba(0,0,0,0.3);
+    padding: 15px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  }
+
+  /* Кнопка Главная */
+  .btn-home {
+    background-color: #ff5c5c;
+    border: none;
+    border-radius: 30px;
+    padding: 10px 25px;
+    color: white;
+    font-weight: 600;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  .btn-home:hover {
+    background-color: #ff1f1f;
+  }
+
+  /* Селект выбора языка */
+  select#language {
+    font-size: 16px;
+    padding: 8px 12px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    color: #333;
+  }
+
+  main {
+    flex-grow: 1;
+    padding: 50px 30px;
+    background: rgba(255 255 255 / 0.15);
+    border-radius: 20px;
+    margin: 30px auto;
+    width: 90%;
+    max-width: 600px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+    text-align: center;
+  }
+
+  h1 {
+    font-size: 3em;
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 6px rgba(0,0,0,0.3);
+  }
+
+  p.greeting {
+    font-size: 1.5em;
+    margin-top: 0;
+    margin-bottom: 40px;
+    font-weight: 600;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+  }
+</style>
 </head>
 <body>
 
-<header>MyShop</header>
+<header>
+  <button class="btn-home" id="homeBtn">Главная</button>
 
-<nav>
-  <button id="homeBtn">Главная</button>
-  <button id="languageBtn">Выбор языка</button>
-  <button id="registerBtn">Регистрация</button>
-</nav>
+  <select id="language" title="Выберите язык">
+    <option value="ru">Русский</option>
+    <option value="en">English</option>
+    <option value="uk">Українська</option>
+  </select>
+</header>
 
 <main>
-
-  <!-- Главная страница -->
-  <section id="homeSection">
-    <h2 id="welcomeText">Добро пожаловать в MyShop!</h2>
-    <p>Здесь вы можете выбрать язык, зарегистрироваться и пользоваться магазином.</p>
-  </section>
-
-  <!-- Выбор языка -->
-  <section id="languageSection" class="hidden">
-    <h2>Выберите язык / Оберіть мову / Choose language</h2>
-    <button onclick="setLanguage('ru')">Русский</button>
-    <button onclick="setLanguage('ua')">Українська</button>
-    <button onclick="setLanguage('en')">English</button>
-    <br/>
-    <button class="back-btn" onclick="showSection('homeSection')">Вернуться назад</button>
-  </section>
-
-  <!-- Регистрация -->
-  <section id="registerSection" class="hidden">
-    <h2>Регистрация</h2>
-    <input id="regEmail" type="email" placeholder="Email" />
-    <input id="regPassword" type="password" placeholder="Пароль" />
-    <button class="action-btn" onclick="registerUser()">Зарегистрироваться</button>
-    <br />
-    <button class="back-btn" onclick="showSection('languageSection')">Вернуться назад</button>
-  </section>
-
-  <!-- Личный кабинет -->
-  <section id="profileSection" class="hidden">
-    <h2>Личный кабинет</h2>
-    <div class="profile-info">Email: <span id="profileEmail"></span></div>
-    <div class="profile-info">Баланс: <span id="profileBalance"></span></div>
-    <button class="back-btn" onclick="logout()">Выйти</button>
-  </section>
-
+  <h1 id="pageTitle">Добро пожаловать</h1>
+  <p class="greeting" id="greetingText">Выберите язык из меню сверху</p>
 </main>
 
 <script>
-  // Языковые данные
-  const texts = {
+  const langSelect = document.getElementById('language');
+  const pageTitle = document.getElementById('pageTitle');
+  const greetingText = document.getElementById('greetingText');
+  const homeBtn = document.getElementById('homeBtn');
+
+  // Тексты для разных языков
+  const translations = {
     ru: {
-      welcome: "Добро пожаловать в MyShop!",
-      balance: "Баланс",
-      logout: "Выйти",
-      registrationSuccess: "Регистрация успешна!",
-      fillFields: "Пожалуйста, заполните все поля.",
-    },
-    ua: {
-      welcome: "Ласкаво просимо в MyShop!",
-      balance: "Баланс",
-      logout: "Вийти",
-      registrationSuccess: "Реєстрація успішна!",
-      fillFields: "Будь ласка, заповніть всі поля.",
+      welcome: "Добро пожаловать",
+      greeting: "Выберите язык из меню сверху",
+      home: "Главная",
+      homePageContent: "Это пустая страница для будущих товаров."
     },
     en: {
-      welcome: "Welcome to MyShop!",
-      balance: "Balance",
-      logout: "Logout",
-      registrationSuccess: "Registration successful!",
-      fillFields: "Please fill all fields.",
+      welcome: "Welcome",
+      greeting: "Select a language from the menu above",
+      home: "Home",
+      homePageContent: "This is an empty page for future products."
+    },
+    uk: {
+      welcome: "Ласкаво просимо",
+      greeting: "Оберіть мову в меню зверху",
+      home: "Головна",
+      homePageContent: "Це порожня сторінка для майбутніх товарів."
     }
   };
 
-  // Текущий язык
-  let currentLang = localStorage.getItem('lang') || 'ru';
+  // Установить язык по умолчанию (укр)
+  let currentLang = 'uk';
+  langSelect.value = currentLang;
+  updateText(currentLang);
 
-  // При загрузке
-  window.onload = () => {
-    applyLanguage();
-    checkLoggedIn();
-  };
+  langSelect.addEventListener('change', (e) => {
+    currentLang = e.target.value;
+    updateText(currentLang);
+  });
 
-  // Функция переключения секций
-  function showSection(id) {
-    const sections = ['homeSection', 'languageSection', 'registerSection', 'profileSection'];
-    sections.forEach(s => {
-      document.getElementById(s).classList.add('hidden');
-    });
-    document.getElementById(id).classList.remove('hidden');
+  homeBtn.addEventListener('click', () => {
+    // Переходим на "пустую" страницу — просто меняем содержимое main
+    pageTitle.textContent = translations[currentLang].home;
+    greetingText.textContent = translations[currentLang].homePageContent;
+  });
+
+  function updateText(lang) {
+    pageTitle.textContent = translations[lang].welcome;
+    greetingText.textContent = translations[lang].greeting;
+    homeBtn.textContent = translations[lang].home;
   }
-
-  // Установка языка
-  function setLanguage(lang) {
-    currentLang = lang;
-    localStorage.setItem('lang', lang);
-    applyLanguage();
-    showSection('homeSection');
-  }
-
-  // Применение языка к странице
-  function applyLanguage() {
-    const t = texts[currentLang];
-    document.getElementById('welcomeText').textContent = t.welcome;
-
-    // Можно дополнительно менять кнопки и другие тексты при необходимости
-  }
-
-  // Регистрация пользователя
-  function registerUser() {
-    const email = document.getElementById('regEmail').value.trim();
-    const password = document.getElementById('regPassword').value.trim();
-
-    const t = texts[currentLang];
-
-    if (!email || !password) {
-      alert(t.fillFields);
-      return;
-    }
-
-    const user = { email, password, balance: 0 };
-    localStorage.setItem('user', JSON.stringify(user));
-
-    alert(t.registrationSuccess);
-
-    // Показать профиль
-    showProfile();
-  }
-
-  // Показать профиль пользователя
-  function showProfile() {
-    const user = JSON.parse(localStorage.getItem('user'));
-    if (!user) {
-      showSection('homeSection');
-      return;
-    }
-
-    const t = texts[currentLang];
-
-    document.getElementById('profileEmail').textContent = user.email;
-    document.getElementById('profileBalance').textContent = user.balance + " " + (currentLang === 'ua' ? 'грн' : currentLang === 'en' ? 'USD' : '₽');
-
-    showSection('profileSection');
-  }
-
-  // Проверка залогинен ли пользователь
-  function checkLoggedIn() {
-    if (localStorage.getItem('user')) {
-      showProfile();
-    } else {
-      showSection('homeSection');
-    }
-  }
-
-  // Выход из личного кабинета
-  function logout() {
-    localStorage.removeItem('user');
-    showSection('homeSection');
-  }
-
-  // Навигация по кнопкам сверху
-  document.getElementById('homeBtn').onclick = () => {
-    checkLoggedIn();
-  };
-  document.getElementById('languageBtn').onclick = () => {
-    showSection('languageSection');
-  };
-  document.getElementById('registerBtn').onclick = () => {
-    showSection('registerSection');
-  };
-
 </script>
 
 </body>
