@@ -1,129 +1,151 @@
 <!DOCTYPE html>
-<html lang="uk">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Магазин</title>
-  <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #f0f4f8;
-      margin: 0; padding: 0;
-      display: flex; flex-direction: column; min-height: 100vh;
-    }
-    header {
-      background: #007bff;
-      color: white;
-      padding: 15px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    header h1 {
-      margin: 0;
-      font-size: 24px;
-    }
-    .language-select {
-      font-size: 16px;
-      padding: 5px;
-      border-radius: 5px;
-      border: none;
-      cursor: pointer;
-    }
-    main {
-      flex: 1;
-      padding: 40px 20px;
-      text-align: center;
-    }
-    button.home-btn {
-      background-color: #28a745;
-      border: none;
-      color: white;
-      padding: 12px 30px;
-      font-size: 18px;
-      border-radius: 8px;
-      cursor: pointer;
-      margin-top: 20px;
-      transition: background-color 0.3s;
-    }
-    button.home-btn:hover {
-      background-color: #218838;
-    }
-    .welcome-text {
-      font-size: 22px;
-      margin-bottom: 20px;
-      color: #333;
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>MyShop</title>
+
+<style>
+  /* Общие стили */
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+    margin: 0; padding: 0;
+    color: #fff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  header {
+    background-color: rgba(0,0,0,0.3);
+    padding: 15px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  }
+
+  /* Кнопка Главная */
+  .btn-home {
+    background-color: #ff5c5c;
+    border: none;
+    border-radius: 30px;
+    padding: 10px 25px;
+    color: white;
+    font-weight: 600;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  .btn-home:hover {
+    background-color: #ff1f1f;
+  }
+
+  /* Селект выбора языка */
+  select#language {
+    font-size: 16px;
+    padding: 8px 12px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    color: #333;
+  }
+
+  main {
+    flex-grow: 1;
+    padding: 50px 30px;
+    background: rgba(255 255 255 / 0.15);
+    border-radius: 20px;
+    margin: 30px auto;
+    width: 90%;
+    max-width: 600px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+    text-align: center;
+  }
+
+  h1 {
+    font-size: 3em;
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 6px rgba(0,0,0,0.3);
+  }
+
+  p.greeting {
+    font-size: 1.5em;
+    margin-top: 0;
+    margin-bottom: 40px;
+    font-weight: 600;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+  }
+</style>
 </head>
 <body>
 
 <header>
-  <h1 id="header-title">Мій магазин</h1>
-  <select id="language" class="language-select">
-    <option value="uk">Українська</option>
+  <button class="btn-home" id="homeBtn">Главная</button>
+
+  <select id="language" title="Выберите язык">
     <option value="ru">Русский</option>
     <option value="en">English</option>
+    <option value="uk">Українська</option>
   </select>
 </header>
 
 <main>
-  <div class="welcome-text" id="welcome-text">Вітаємо в нашому магазині!</div>
-  <button class="home-btn" id="home-btn">Головна сторінка</button>
+  <h1 id="pageTitle">Добро пожаловать</h1>
+  <p class="greeting" id="greetingText">Выберите язык из меню сверху</p>
 </main>
 
 <script>
-  const languageSelect = document.getElementById('language');
-  const headerTitle = document.getElementById('header-title');
-  const welcomeText = document.getElementById('welcome-text');
-  const homeBtn = document.getElementById('home-btn');
+  const langSelect = document.getElementById('language');
+  const pageTitle = document.getElementById('pageTitle');
+  const greetingText = document.getElementById('greetingText');
+  const homeBtn = document.getElementById('homeBtn');
 
-  // Тексты на трех языках
-  const texts = {
-    uk: {
-      header: 'Мій магазин',
-      welcome: 'Вітаємо в нашому магазині!',
-      home: 'Головна сторінка'
-    },
+  // Тексты для разных языков
+  const translations = {
     ru: {
-      header: 'Мой магазин',
-      welcome: 'Добро пожаловать в наш магазин!',
-      home: 'Главная страница'
+      welcome: "Добро пожаловать",
+      greeting: "Выберите язык из меню сверху",
+      home: "Главная",
+      homePageContent: "Это пустая страница для будущих товаров."
     },
     en: {
-      header: 'My Shop',
-      welcome: 'Welcome to our shop!',
-      home: 'Home'
+      welcome: "Welcome",
+      greeting: "Select a language from the menu above",
+      home: "Home",
+      homePageContent: "This is an empty page for future products."
+    },
+    uk: {
+      welcome: "Ласкаво просимо",
+      greeting: "Оберіть мову в меню зверху",
+      home: "Головна",
+      homePageContent: "Це порожня сторінка для майбутніх товарів."
     }
   };
 
-  // Функция для обновления текста
-  function updateLanguage(lang) {
-    headerTitle.textContent = texts[lang].header;
-    welcomeText.textContent = texts[lang].welcome;
-    homeBtn.textContent = texts[lang].home;
-    languageSelect.value = lang;
-  }
+  // Установить язык по умолчанию (укр)
+  let currentLang = 'uk';
+  langSelect.value = currentLang;
+  updateText(currentLang);
 
-  // Установка языка по умолчанию: украиснкий
-  updateLanguage('uk');
-
-  // Сохраняем выбор языка в localStorage
-  if(localStorage.getItem('lang')) {
-    updateLanguage(localStorage.getItem('lang'));
-  }
-
-  // Обработчик смены языка
-  languageSelect.addEventListener('change', (e) => {
-    const selectedLang = e.target.value;
-    updateLanguage(selectedLang);
-    localStorage.setItem('lang', selectedLang);
+  langSelect.addEventListener('change', (e) => {
+    currentLang = e.target.value;
+    updateText(currentLang);
   });
 
-  // Кнопка главной страницы — пока просто обновляет приветствие (потом можно менять на товары)
   homeBtn.addEventListener('click', () => {
-    alert('Тут буде головна сторінка з товарами');
+    // Переходим на "пустую" страницу — просто меняем содержимое main
+    pageTitle.textContent = translations[currentLang].home;
+    greetingText.textContent = translations[currentLang].homePageContent;
   });
+
+  function updateText(lang) {
+    pageTitle.textContent = translations[lang].welcome;
+    greetingText.textContent = translations[lang].greeting;
+    homeBtn.textContent = translations[lang].home;
+  }
 </script>
 
 </body>
