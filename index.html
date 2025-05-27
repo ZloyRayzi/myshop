@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>MyShop</title>
+<title>RayziShop</title>
 
 <style>
   /* Общие стили */
@@ -84,6 +84,7 @@
 
 <header>
   <button class="btn-home" id="homeBtn">Главная</button>
+  <button class="btn-home" id="registerBtn">Регистрация</button>
 
   <select id="language" title="Выберите язык">
     <option value="ru">Русский</option>
@@ -102,6 +103,7 @@
   const pageTitle = document.getElementById('pageTitle');
   const greetingText = document.getElementById('greetingText');
   const homeBtn = document.getElementById('homeBtn');
+  const registerBtn = document.getElementById('registerBtn');
 
   // Тексты для разных языков
   const translations = {
@@ -109,18 +111,21 @@
       welcome: "Добро пожаловать",
       greeting: "Выберите язык из меню сверху",
       home: "Главная",
+      register: "Регистрация",
       homePageContent: "Это пустая страница для будущих товаров."
     },
     en: {
       welcome: "Welcome",
       greeting: "Select a language from the menu above",
       home: "Home",
+      register: "Register",
       homePageContent: "This is an empty page for future products."
     },
     uk: {
       welcome: "Ласкаво просимо",
       greeting: "Оберіть мову в меню зверху",
       home: "Головна",
+      register: "Реєстрація",
       homePageContent: "Це порожня сторінка для майбутніх товарів."
     }
   };
@@ -145,6 +150,7 @@
     pageTitle.textContent = translations[lang].welcome;
     greetingText.textContent = translations[lang].greeting;
     homeBtn.textContent = translations[lang].home;
+    registerBtn.textContent = translations[lang].register;
   }
 </script>
 
