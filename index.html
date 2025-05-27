@@ -1,116 +1,276 @@
 <!DOCTYPE html>
-<html lang="uk">
+<html lang="ru">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>MyShop</title>
+  <title>Магазин MyShop</title>
   <style>
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: Arial, sans-serif;
       margin: 0; padding: 0;
-      background: #f0f4f8;
-      color: #333;
+      background: #f0f0f0;
     }
     header {
-      background: linear-gradient(90deg, #007bff, #0056b3);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 10px 20px;
-    }
-    .nav-buttons button, .account-btn {
-      flex: 1;
-      margin: 0 5px;
-      padding: 12px 0;
-      border: none;
-      border-radius: 6px;
-      background: linear-gradient(45deg, #00c6ff, #0072ff);
-      color: white;
-      font-weight: 600;
-      font-size: 16px;
-      cursor: pointer;
-      transition: background 0.3s ease;
-      min-width: 120px;
-    }
-    .nav-buttons button:hover, .account-btn:hover {
-      background: linear-gradient(45deg, #0056b3, #003d80);
-    }
-    .nav-buttons {
-      display: flex;
-      gap: 10px;
-      flex-grow: 1;
-      max-width: 600px;
-    }
-    .account-actions {
-      display: flex;
-      align-items: center;
-    }
-    .account-btn {
-      margin-left: 15px;
-    }
-    .lang-select {
+      background: #0077cc;
+      padding: 10px;
       display: flex;
       justify-content: center;
-      margin: 30px 0 10px;
+      gap: 15px;
     }
-    .lang-select select {
-      padding: 8px 12px;
-      font-size: 18px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-      outline: none;
+    header button {
+      background: #005fa3;
+      border: none;
+      color: white;
+      padding: 10px 20px;
       cursor: pointer;
+      font-size: 16px;
+      border-radius: 5px;
+      transition: background 0.3s;
     }
-    .welcome-message {
+    header button:hover {
+      background: #004a7a;
+    }
+    #profileBtn {
+      position: fixed;
+      top: 15px;
+      right: 15px;
+      background: #28a745;
+      border: none;
+      color: white;
+      padding: 10px 15px;
+      cursor: pointer;
+      font-size: 14px;
+      border-radius: 5px;
+      display: none;
+    }
+    main {
+      max-width: 600px;
+      margin: 40px auto;
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.1);
+      min-height: 300px;
+    }
+    h2 {
       text-align: center;
-      font-size: 26px;
-      font-weight: 600;
+      margin-bottom: 20px;
+    }
+    form label {
+      display: block;
+      margin: 10px 0 5px;
+    }
+    form input, form select {
+      width: 100%;
+      padding: 8px;
+      box-sizing: border-box;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+    }
+    form button {
+      margin-top: 15px;
+      background: #0077cc;
+      color: white;
+      border: none;
+      padding: 10px;
+      width: 100%;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: background 0.3s;
+    }
+    form button:hover {
+      background: #005fa3;
+    }
+    #captcha-container {
+      margin-top: 15px;
+      text-align: center;
+    }
+    #greeting {
+      font-size: 18px;
+      text-align: center;
       margin-top: 50px;
-      color: #007bff;
+    }
+    #errorMsg {
+      color: red;
+      text-align: center;
+      margin-top: 10px;
+    }
+    #profileInfo {
+      font-size: 16px;
     }
   </style>
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 <body>
 
-  <header>
-    <div class="nav-buttons">
-      <button id="homeBtn" onclick="goHome()">Головна</button>
-      <button id="registerBtn">Реєстрація</button>
-    </div>
-    <div class="account-actions">
-      <button id="accountBtn" class="account-btn" style="display:none;">Особистий кабінет</button>
-    </div>
-  </header>
+<header>
+  <button onclick="showHome()">Главная</button>
+  <button onclick="showLanguage()">Выбор языка</button>
+  <button onclick="showRegister()">Регистрация</button>
+</header>
 
-  <div class="lang-select">
-    <select id="languageSelect" onchange="changeLanguage()">
-      <option value="uk">Українська</option>
-      <option value="ru">Русский</option>
-      <option value="en">English</option>
-    </select>
-  </div>
+<button id="profileBtn" onclick="showProfile()">Личный кабинет</button>
 
-  <div class="welcome-message" id="welcomeMessage">
-    Вітаємо на MyShop — оберіть мову та починайте покупки!
-  </div>
+<main>
+  <!-- Главная страница с приветствием -->
+  <section id="homeSection">
+    <h2 id="greeting">Выберите язык, пожалуйста</h2>
+  </section>
+
+  <!-- Выбор языка -->
+  <section id="languageSection" style="display:none;">
+    <h2>Выберите язык / Оберіть мову / Choose Language</h2>
+    <button onclick="setLanguage('ru')">Русский</button>
+    <button onclick="setLanguage('uk')">Українська</button>
+    <button onclick="setLanguage('en')">English</button>
+  </section>
+
+  <!-- Регистрация -->
+  <section id="registerSection" style="display:none;">
+    <h2>Регистрация</h2>
+    <form id="registerForm" onsubmit="return registerUser(event)">
+      <label for="email">Email:</label>
+      <input type="email" id="email" required />
+
+      <label for="name">Имя:</label>
+      <input type="text" id="name" required />
+
+      <label for="balance">Баланс (введите сумму):</label>
+      <input type="number" id="balance" min="0" required />
+
+      <label for="currency">Валюта:</label>
+      <select id="currency">
+        <option value="UAH">Гривна</option>
+        <option value="USD">Доллар</option>
+        <option value="EUR">Евро</option>
+      </select>
+
+      <div id="captcha-container" class="g-recaptcha" data-sitekey="6LelqksrAAAAAFRIEYkl9nRwsD6Z1_3gEuZ9ZS8m"></div>
+
+      <button type="submit">Зарегистрироваться</button>
+    </form>
+    <div id="errorMsg"></div>
+  </section>
+
+  <!-- Личный кабинет -->
+  <section id="profileSection" style="display:none;">
+    <h2>Личный кабинет</h2>
+    <div id="profileInfo"></div>
+  </section>
+</main>
 
 <script>
-  function goHome() {
-    // Перенаправление на главную страницу
-    window.location.href = 'home.html';
+  let currentLang = 'ru'; // язык по умолчанию
+  let userData = null;
+
+  // Показать главную страницу
+  function showHome() {
+    hideAllSections();
+    document.getElementById('homeSection').style.display = 'block';
+    updateGreeting();
   }
 
-  function changeLanguage() {
-    const lang = document.getElementById('languageSelect').value;
-    const welcome = document.getElementById('welcomeMessage');
+  // Показать выбор языка
+  function showLanguage() {
+    hideAllSections();
+    document.getElementById('languageSection').style.display = 'block';
+  }
 
-    if (lang === 'uk') {
-      welcome.textContent = 'Вітаємо на MyShop — оберіть мову та починайте покупки!';
-    } else if (lang === 'ru') {
-      welcome.textContent = 'Добро пожаловать в MyShop — выберите язык и начинайте покупки!';
-    } else if (lang === 'en') {
-      welcome.textContent = 'Welcome to MyShop — choose your language and start shopping!';
+  // Показать регистрацию
+  function showRegister() {
+    hideAllSections();
+    document.getElementById('registerSection').style.display = 'block';
+    document.getElementById('errorMsg').innerText = '';
+    grecaptcha.reset(); // сброс капчи при показе формы
+  }
+
+  // Показать профиль
+  function showProfile() {
+    hideAllSections();
+    document.getElementById('profileSection').style.display = 'block';
+    displayProfile();
+  }
+
+  // Скрыть все секции
+  function hideAllSections() {
+    document.getElementById('homeSection').style.display = 'none';
+    document.getElementById('languageSection').style.display = 'none';
+    document.getElementById('registerSection').style.display = 'none';
+    document.getElementById('profileSection').style.display = 'none';
+  }
+
+  // Установить язык
+  function setLanguage(lang) {
+    currentLang = lang;
+    updateGreeting();
+    showHome();
+  }
+
+  // Обновить приветствие в зависимости от языка
+  function updateGreeting() {
+    const greetEl = document.getElementById('greeting');
+    if (currentLang === 'ru') {
+      greetEl.innerText = 'Добро пожаловать в магазин MyShop!';
+    } else if (currentLang === 'uk') {
+      greetEl.innerText = 'Ласкаво просимо до магазину MyShop!';
+    } else if (currentLang === 'en') {
+      greetEl.innerText = 'Welcome to MyShop store!';
     }
+  }
+
+  // Обработка регистрации
+  function registerUser(event) {
+    event.preventDefault();
+    const email = document.getElementById('email').value.trim();
+    const name = document.getElementById('name').value.trim();
+    const balance = parseFloat(document.getElementById('balance').value);
+    const currency = document.getElementById('currency').value;
+
+    // Проверяем капчу
+    const captchaResponse = grecaptcha.getResponse();
+    if (!captchaResponse) {
+      document.getElementById('errorMsg').innerText = 'Пожалуйста, подтвердите, что вы не робот.';
+      return false;
+    }
+
+    if (!email || !name || isNaN(balance) || balance < 0) {
+      document.getElementById('errorMsg').innerText = 'Пожалуйста, заполните все поля корректно.';
+      return false;
+    }
+
+    // Сохраняем данные пользователя (в реальном проекте отправлять на сервер)
+    userData = { email, name, balance, currency };
+    alert('Регистрация прошла успешно!');
+
+    // Показать кнопку Личного кабинета
+    document.getElementById('profileBtn').style.display = 'block';
+
+    // Перейти на главную
+    showHome();
+    return false;
+  }
+
+  // Показать данные профиля
+  function displayProfile() {
+    if (!userData) {
+      alert('Вы не зарегистрированы!');
+      showRegister();
+      return;
+    }
+    let currName = 'Гривна';
+    if (userData.currency === 'USD') currName = 'Доллар';
+    else if (userData.currency === 'EUR') currName = 'Евро';
+
+    document.getElementById('profileInfo').innerHTML = `
+      <p><b>Имя:</b> ${userData.name}</p>
+      <p><b>Email:</b> ${userData.email}</p>
+      <p><b>Баланс:</b> ${userData.balance} ${currName}</p>
+    `;
+  }
+
+  // При загрузке страницы показываем главную
+  window.onload = function() {
+    showHome();
   }
 </script>
 
