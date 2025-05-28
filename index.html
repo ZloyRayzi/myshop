@@ -1,166 +1,63 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>RayziShop</title>
-
-<style>
-  /* Общие стили */
-  body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
-    margin: 0; padding: 0;
-    color: #fff;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-  }
-
-  header {
-    background-color: rgba(0,0,0,0.3);
-    padding: 15px 30px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-  }
-
-  /* Группа кнопок слева */
-  .btn-group {
-    display: flex;
-    gap: 15px;
-  }
-
-  /* Кнопка Главная и Регистрация */
-  .btn-home {
-    background-color: #ff5c5c;
-    border: none;
-    border-radius: 30px;
-    padding: 10px 25px;
-    color: white;
-    font-weight: 600;
-    font-size: 18px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  .btn-home:hover {
-    background-color: #ff1f1f;
-  }
-
-  /* Селект выбора языка */
-  select#language {
-    font-size: 16px;
-    padding: 8px 12px;
-    border-radius: 10px;
-    border: none;
-    cursor: pointer;
-    font-weight: 600;
-    color: #333;
-  }
-
-  main {
-    flex-grow: 1;
-    padding: 50px 30px;
-    background: rgba(255 255 255 / 0.15);
-    border-radius: 20px;
-    margin: 30px auto;
-    width: 90%;
-    max-width: 600px;
-    box-shadow: 0 8px 30px rgba(0,0,0,0.2);
-    text-align: center;
-  }
-
-  h1 {
-    font-size: 3em;
-    margin-bottom: 15px;
-    text-shadow: 2px 2px 6px rgba(0,0,0,0.3);
-  }
-
-  p.greeting {
-    font-size: 1.5em;
-    margin-top: 0;
-    margin-bottom: 40px;
-    font-weight: 600;
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
-  }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Playerok - Торговая площадка игровых товаров</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body>
+<body class="bg-gray-100 text-gray-900">
+  <!-- Header -->
+  <header class="bg-white shadow-md sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+      <h1 class="text-xl font-bold text-indigo-600">Playerok</h1>
+      <nav class="space-x-4">
+        <a href="#" class="text-gray-700 hover:text-indigo-600">Игры</a>
+        <a href="#" class="text-gray-700 hover:text-indigo-600">Аккаунты</a>
+        <a href="#" class="text-gray-700 hover:text-indigo-600">Пополнение</a>
+        <a href="#" class="text-gray-700 hover:text-indigo-600">Контакты</a>
+      </nav>
+      <div>
+        <button class="bg-indigo-600 text-white px-4 py-2 rounded">Войти</button>
+      </div>
+    </div>
+  </header>
 
-<header>
-  <div class="btn-group">
-    <button class="btn-home" id="homeBtn">Главная</button>
-    <button class="btn-home" id="registerBtn">Регистрация</button>
-  </div>
+  <!-- Hero Section -->
+  <section class="bg-indigo-50 py-16 text-center">
+    <h2 class="text-3xl font-semibold mb-4">Покупка и продажа игровых товаров</h2>
+    <p class="text-gray-600 mb-6">Аккаунты, внутриигровая валюта, скины и многое другое</p>
+    <a href="#" class="bg-indigo-600 text-white px-6 py-3 rounded shadow-md">Начать</a>
+  </section>
 
-  <select id="language" title="Выберите язык">
-    <option value="ru">Русский</option>
-    <option value="en">English</option>
-    <option value="uk">Українська</option>
-  </select>
-</header>
+  <!-- Popular Games -->
+  <section class="max-w-7xl mx-auto py-12 px-4">
+    <h3 class="text-2xl font-semibold mb-8">Популярные игры</h3>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+      <div class="bg-white p-4 rounded shadow hover:shadow-lg">
+        <img src="https://via.placeholder.com/150" alt="CS2" class="mb-2 rounded">
+        <p class="text-center font-medium">Counter-Strike 2</p>
+      </div>
+      <div class="bg-white p-4 rounded shadow hover:shadow-lg">
+        <img src="https://via.placeholder.com/150" alt="Genshin" class="mb-2 rounded">
+        <p class="text-center font-medium">Genshin Impact</p>
+      </div>
+      <div class="bg-white p-4 rounded shadow hover:shadow-lg">
+        <img src="https://via.placeholder.com/150" alt="Fortnite" class="mb-2 rounded">
+        <p class="text-center font-medium">Fortnite</p>
+      </div>
+      <div class="bg-white p-4 rounded shadow hover:shadow-lg">
+        <img src="https://via.placeholder.com/150" alt="Roblox" class="mb-2 rounded">
+        <p class="text-center font-medium">Roblox</p>
+      </div>
+    </div>
+  </section>
 
-<main>
-  <h1 id="pageTitle">Добро пожаловать</h1>
-  <p class="greeting" id="greetingText">Выберите язык из меню сверху</p>
-</main>
-
-<script>
-  const langSelect = document.getElementById('language');
-  const pageTitle = document.getElementById('pageTitle');
-  const greetingText = document.getElementById('greetingText');
-  const homeBtn = document.getElementById('homeBtn');
-  const registerBtn = document.getElementById('registerBtn');
-
-  // Тексты для разных языков
-  const translations = {
-    ru: {
-      welcome: "Добро пожаловать",
-      greeting: "Выберите язык из меню сверху",
-      home: "Главная",
-      register: "Регистрация",
-      homePageContent: "Это пустая страница для будущих товаров."
-    },
-    en: {
-      welcome: "Welcome",
-      greeting: "Select a language from the menu above",
-      home: "Home",
-      register: "Register",
-      homePageContent: "This is an empty page for future products."
-    },
-    uk: {
-      welcome: "Ласкаво просимо",
-      greeting: "Оберіть мову в меню зверху",
-      home: "Головна",
-      register: "Реєстрація",
-      homePageContent: "Це порожня сторінка для майбутніх товарів."
-    }
-  };
-
-  // Установить язык по умолчанию (укр)
-  let currentLang = 'uk';
-  langSelect.value = currentLang;
-  updateText(currentLang);
-
-  langSelect.addEventListener('change', (e) => {
-    currentLang = e.target.value;
-    updateText(currentLang);
-  });
-
-  homeBtn.addEventListener('click', () => {
-    // Переходим на "пустую" страницу — просто меняем содержимое main
-    pageTitle.textContent = translations[currentLang].home;
-    greetingText.textContent = translations[currentLang].homePageContent;
-  });
-
-  function updateText(lang) {
-    pageTitle.textContent = translations[lang].welcome;
-    greetingText.textContent = translations[lang].greeting;
-    homeBtn.textContent = translations[lang].home;
-    registerBtn.textContent = translations[lang].register;
-  }
-</script>
-
+  <!-- Footer -->
+  <footer class="bg-white mt-16 py-6 border-t">
+    <div class="max-w-7xl mx-auto px-4 text-center text-sm text-gray-500">
+      &copy; 2025 Playerok. Все права защищены.
+    </div>
+  </footer>
 </body>
 </html>
